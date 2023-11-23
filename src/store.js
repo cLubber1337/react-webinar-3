@@ -1,3 +1,5 @@
+import {generatorUniqueNumber} from "./utils";
+
 /**
  * Хранилище состояния приложения
  */
@@ -44,7 +46,7 @@ class Store {
   addItem() {
     this.setState({
       ...this.state,
-      list: [...this.state.list, {code: this.state.list.length + 1, title: 'Новая запись'}]
+      list: [...this.state.list, {code: generatorUniqueNumber(this.state.list), title: 'Новая запись'}]
     })
   };
 
@@ -69,6 +71,9 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          !item.count ? item.count = 1 : ++item.count
+        } else if (item.code !== code) {
+          item.selected = false
         }
         return item;
       })
