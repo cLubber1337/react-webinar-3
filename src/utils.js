@@ -29,7 +29,7 @@ export function createElement(name, props = {}, ...children) {
 
 
 export function generatorUniqueNumber(state) {
-  let randomUniqNumber = Math.round(Math.random() * 666)
+  let randomUniqNumber = Math.round(Math.random() * new Date())
   if (state.find((item) => item.code === randomUniqNumber)) {
     generatorUniqueNumber(state)
   }
