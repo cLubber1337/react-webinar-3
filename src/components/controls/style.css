@@ -1,5 +1,21 @@
 .Controls {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   padding: 20px;
+}
+
+.Controls button {
+  min-width: 80px;
+}
+
+.Controls-total-price {
+  margin-right: 20px;
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.Controls-total-price span {
+  font-weight: 400;
+  padding-right: 15px;
 }

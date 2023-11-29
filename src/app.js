@@ -1,8 +1,10 @@
-import React, {useCallback} from 'react';
-import List from "./components/list";
-import Controls from "./components/controls";
-import Head from "./components/head";
-import PageLayout from "./components/page-layout";
+import React, {useCallback, useState} from 'react';
+import List from "./components/list/list";
+import Controls from "./components/controls/controls";
+import Header from "./components/header/header";
+import PageLayout from "./components/page-layout/page-layout";
+import {Modal} from "./components/modal/modal";
+import {Cart} from "./components/cart/cart";
 
 /**
  * Приложение
@@ -10,32 +12,46 @@ import PageLayout from "./components/page-layout";
  * @returns {React.ReactElement}
  */
 function App({store}) {
+  const [isOpenModal, setIsOpenModal] = useState(false);
 
-  const list = store.getState().list;
+  const products = store.getState().products;
+  const cart = store.getCart();
+
 
   const callbacks = {
-    onDeleteItem: useCallback((code) => {
-      store.deleteItem(code);
+    addToCart: useCallback((product) => {
+      store.addToCart(product);
     }, [store]),
-
-    onSelectItem: useCallback((code) => {
-      store.selectItem(code);
-    }, [store]),
-
-    onAddItem: useCallback(() => {
-      store.addItem();
-    }, [store])
-  }
+    removeFromCard: (code) => {
+      store.removeFromCart(code);
+    },
+    openModal: () => {
+      setIsOpenModal(true);
+    },
+    closeModal: () => {
+      setIsOpenModal(false);
+    }
+  };
 
   return (
     <PageLayout>
-      <Head title='Приложение на чистом JS'/>
-      <Controls onAdd={callbacks.onAddItem}/>
-      <List list={list}
-            onDeleteItem={callbacks.onDeleteItem}
-            onSelectItem={callbacks.onSelectItem}/>
+      <Modal isOpen={isOpenModal}>
+        <Cart
+          closeModal={callbacks.closeModal}
+          removeFromCard={callbacks.removeFromCard}
+          cartItems={cart.items}
+          totalPrice={cart.totalPrice}
+        />
+      </Modal>
+      <Header title='Магазин'/>
+      <Controls
+        totalPrice={cart.totalPrice}
+        totalItems={cart.totalItems}
+        onOpenModal={callbacks.openModal}
+      />
+      <List list={products} onAddToCart={callbacks.addToCart}/>
     </PageLayout>
-  );
+  )
 }
 
 export default App;

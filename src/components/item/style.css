@@ -18,8 +18,23 @@
   padding: 20px 10px;
 }
 
+.Item-price {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  color: #404040;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 400;
+  padding-right: 14px;
+}
+
 .Item-actions {
   display: flex;
   justify-content: flex-end;
   padding: 20px 20px 20px 10px;
+}
+
+.Item-actions button {
+  min-width: 76px;
 }
