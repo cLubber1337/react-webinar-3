@@ -54,25 +54,29 @@ class Store {
     for (const listener of this.listeners) listener();
   }
 
-  addToCart(product) {
-    const item = this.cart.items.find(item => item.code === product.code);
+  addToCart(code) {
+    const product = this.state.products.find(item => item.code === code);
+    const itemInCart = this.cart.items.find(item => item.code === code);
     this.setCart({
       ...this.cart,
       totalItems: this.cart.totalItems + 1,
       totalPrice: this.cart.totalPrice + product.price,
-      items: !item ? [...this.cart.items, {...product, count: 1}] :
+      items: !itemInCart ? [...this.cart.items, {...product, count: 1}] :
         this.cart.items.map(item => item.code === product.code ?
           {...item, count: item.count + 1} : item)
     })
   }
 
-  removeFromCart(product) {
+  removeFromCart(code) {
+    const product = this.cart.items.find(item => item.code === code);
+    if (product) {
       this.setCart({
         ...this.cart,
         totalItems: this.cart.totalItems - product.count,
         totalPrice: this.cart.totalPrice - product.count * product.price,
         items: this.cart.items.filter(item => item.code !== product.code)
       })
+    }
   }
 }
 

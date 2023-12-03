@@ -19,8 +19,8 @@ function App({store}) {
 
 
   const callbacks = {
-    addToCart: useCallback((product) => {
-      store.addToCart(product);
+    addToCart: useCallback((code) => {
+      store.addToCart(code);
     }, [store]),
     removeFromCard: (code) => {
       store.removeFromCart(code);
@@ -46,10 +46,10 @@ function App({store}) {
       <Header title='Магазин'/>
       <Controls
         totalPrice={cart.totalPrice}
-        totalItems={cart.totalItems}
+        totalItems={cart.items.length}
         onOpenModal={callbacks.openModal}
       />
-      <List list={products} onAddToCart={callbacks.addToCart}/>
+      <List list={products} onClickButton={callbacks.addToCart}/>
     </PageLayout>
   )
 }
