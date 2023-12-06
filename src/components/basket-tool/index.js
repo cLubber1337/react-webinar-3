@@ -3,37 +3,43 @@ import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat, plural} from "../../utils";
 import './style.css';
+import {Link} from "react-router-dom";
+import {ROUTES} from "../../routes/routes";
 
 function BasketTool({sum, amount, onOpen}) {
-  const cn = bem('BasketTool');
-  return (
-    <div className={cn()}>
-      <span className={cn('label')}>В корзине:</span>
-      <span className={cn('total')}>
+    const cn = bem('BasketTool');
+    return (
+        <div className={cn()}>
+                <Link className={'link-home'} to={ROUTES.HOME}>Главная</Link>
+            <div>
+                <span className={cn('label')}>В корзине:</span>
+                <span className={cn('total')}>
         {amount
-          ? `${amount} ${plural(amount, {
-            one: 'товар',
-            few: 'товара',
-            many: 'товаров'
-          })} / ${numberFormat(sum)} ₽`
-          : `пусто`
+            ? `${amount} ${plural(amount, {
+                one: 'товар',
+                few: 'товара',
+                many: 'товаров'
+            })} / ${numberFormat(sum)} ₽`
+            : `пусто`
         }
       </span>
-      <button onClick={onOpen}>Перейти</button>
-    </div>
-  );
+                <button onClick={onOpen}>Перейти</button>
+            </div>
+        </div>
+    );
 }
 
 BasketTool.propTypes = {
-  onOpen: PropTypes.func.isRequired,
-  sum: PropTypes.number,
-  amount: PropTypes.number
+    onOpen: PropTypes.func.isRequired,
+    sum: PropTypes.number,
+    amount: PropTypes.number
 };
 
 BasketTool.defaultProps = {
-  onOpen: () => {},
-  sum: 0,
-  amount: 0
+    onOpen: () => {
+    },
+    sum: 0,
+    amount: 0
 }
 
 export default memo(BasketTool);

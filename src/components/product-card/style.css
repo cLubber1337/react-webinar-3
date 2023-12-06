@@ -1,0 +1,22 @@
+.product-card {
+    padding: 0 40px;
+}
+
+.product-card-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    list-style: none;
+    padding: 0;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.product-card-list li span  {
+    font-weight: 700;
+}
+
+.product-card-list__price {
+    font-weight: 700;
+    font-size: 24px;
+}
