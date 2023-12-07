@@ -1,0 +1,10 @@
+.lang-switcher {
+  display: flex;
+  gap: 10px;
+  font-size: 18px;
+}
+
+.lang-active {
+  text-decoration: underline;
+  font-weight: bold;
+}

@@ -5,9 +5,10 @@ import {cn as bem} from "@bem-react/classname";
 import './style.css';
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../routes/routes";
+import {useTrans} from "../../translation/useTrans";
 
 function ItemBasket(props) {
-
+  const {trans} = useTrans()
   const cn = bem('ItemBasket');
 
   const callbacks = {
@@ -20,9 +21,9 @@ function ItemBasket(props) {
       <Link to={`${ROUTES.PRODUCT}/${props.item._id}`} onClick={props.onClose} className={cn('title')}>{props.item.title}</Link>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
-        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} шт</div>
+        <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {trans('шт')}</div>
         <div className={cn('cell')}>
-          <button onClick={callbacks.onRemove}>Удалить</button>
+          <button onClick={callbacks.onRemove}>{trans('Удалить')}</button>
         </div>
       </div>
     </div>

@@ -2,8 +2,12 @@ import {memo, useEffect, useRef} from "react";
 import PropTypes from "prop-types";
 import {cn as bem} from '@bem-react/classname';
 import './style.css';
+import {useTrans} from "../../translation/useTrans";
 
 function ModalLayout(props) {
+  const {trans} = useTrans()
+
+
 
   const cn = bem('ModalLayout');
 
@@ -32,7 +36,7 @@ function ModalLayout(props) {
       <div className={cn('frame')} ref={frame}>
         <div className={cn('head')}>
           <h1 className={cn('title')}>{props.title}</h1>
-          <button className={cn('close')} onClick={props.onClose}>Закрыть</button>
+          <button className={cn('close')} onClick={props.onClose}>{trans('Закрыть')}</button>
         </div>
         <div className={cn('content')}>
           {props.children}
