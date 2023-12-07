@@ -21,3 +21,7 @@
   font-size: 18px;
   text-decoration: underline;
 }
+
+.wrapper {
+  display: flex;
+}

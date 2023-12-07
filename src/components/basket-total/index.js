@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import {cn as bem} from '@bem-react/classname';
 import {numberFormat} from "../../utils";
 import './style.css';
+import {useTrans} from "../../translation/useTrans";
 
 function BasketTotal({sum}) {
+  const {trans} = useTrans()
   const cn = bem('BasketTotal');
   return (
     <div className={cn()}>
-      <span className={cn('cell')}>Итого</span>
+      <span className={cn('cell')}>{trans('Итого')}</span>
       <span className={cn('cell')}> {numberFormat(sum)} ₽</span>
       <span className={cn('cell')}></span>
     </div>

@@ -5,8 +5,11 @@ import {numberFormat} from "../../utils";
 import './style.css';
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../routes/routes";
+import {useTrans} from "../../translation/useTrans";
 
 function Item(props) {
+
+  const {trans} = useTrans()
 
   const cn = bem('Item');
 
@@ -22,7 +25,7 @@ function Item(props) {
       </Link>
       <div className={cn('actions')}>
         <div className={cn('price')}>{numberFormat(props.item.price)} ₽</div>
-        <button onClick={callbacks.onAdd}>Добавить</button>
+        <button onClick={callbacks.onAdd}>{trans('Добавить')}</button>
       </div>
     </div>
   );

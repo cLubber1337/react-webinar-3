@@ -5,25 +5,30 @@ import {numberFormat, plural} from "../../utils";
 import './style.css';
 import {Link} from "react-router-dom";
 import {ROUTES} from "../../routes/routes";
+import {useTrans} from "../../translation/useTrans";
+import {LangSwitcher} from "../lang-switcher/lang-switcher";
+
 
 function BasketTool({sum, amount, onOpen}) {
+    const {trans} = useTrans()
     const cn = bem('BasketTool');
     return (
         <div className={cn()}>
-                <Link className={'link-home'} to={ROUTES.HOME}>Главная</Link>
+            <Link className={'link-home'} to={ROUTES.HOME}>{trans('Главная')}</Link>
+            <LangSwitcher />
             <div>
-                <span className={cn('label')}>В корзине:</span>
+                <span className={cn('label')}>{trans('В корзине')}:</span>
                 <span className={cn('total')}>
         {amount
             ? `${amount} ${plural(amount, {
-                one: 'товар',
-                few: 'товара',
-                many: 'товаров'
+                one: trans('товар'),
+                few: trans('товара'),
+                many: trans('товаров')
             })} / ${numberFormat(sum)} ₽`
-            : `пусто`
+            : <span>{trans('пусто')}</span>
         }
       </span>
-                <button onClick={onOpen}>Перейти</button>
+                <button onClick={onOpen}>{trans('Перейти')}</button>
             </div>
         </div>
     );
