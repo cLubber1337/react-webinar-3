@@ -18,7 +18,7 @@ function ItemBasket(props) {
   return (
     <div className={cn()}>
       {/*<div className={cn('code')}>{props.item._id}</div>*/}
-      <Link to={`${ROUTES.PRODUCT}/${props.item._id}`} onClick={props.onClose} className={cn('title')}>{props.item.title}</Link>
+      <Link to={props.linkTo} onClick={props.onClose} className={cn('title')}>{props.item.title}</Link>
       <div className={cn('right')}>
         <div className={cn('cell')}>{numberFormat(props.item.price)} ₽</div>
         <div className={cn('cell')}>{numberFormat(props.item.amount || 0)} {trans('шт')}</div>
@@ -38,11 +38,13 @@ ItemBasket.propTypes = {
     amount: PropTypes.number
   }).isRequired,
   onRemove: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  linkTo: PropTypes.string
 }
 
 ItemBasket.defaultProps = {
   onRemove: () => {},
+  linkTo: ROUTES.HOME
 }
 
 export default memo(ItemBasket);

@@ -6,6 +6,7 @@ import BasketTotal from "../../components/basket-total";
 import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import {useTrans} from "../../translation/useTrans";
+import {ROUTES} from "../../routes/routes";
 
 function Basket() {
   const {trans} = useTrans()
@@ -29,6 +30,7 @@ function Basket() {
       return <ItemBasket item={item}
                          onRemove={callbacks.removeFromBasket}
                          onClose={callbacks.closeModal}
+                         linkTo={`${ROUTES.PRODUCT}/${item._id}`}
       />
     }, [callbacks.removeFromBasket]),
   };

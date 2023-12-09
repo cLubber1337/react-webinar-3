@@ -8,6 +8,7 @@ import useStore from "../../store/use-store";
 import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
 import {useTrans} from "../../translation/useTrans";
+import {ROUTES} from "../../routes/routes";
 
 
 const LIMIT = 10;
@@ -37,7 +38,7 @@ function Main() {
 
   const renders = {
     item: useCallback((item) => {
-      return <Item item={item} onAdd={callbacks.addToBasket}/>
+      return <Item item={item} onAdd={callbacks.addToBasket} linkTo={`${ROUTES.PRODUCT}/${item._id}`}/>
     }, [callbacks.addToBasket]),
   };
 
