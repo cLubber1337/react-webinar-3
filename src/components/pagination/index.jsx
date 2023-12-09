@@ -1,6 +1,7 @@
 import './style.css'
 import {paginationRange} from "../../utils";
 import PropTypes from "prop-types";
+import {memo} from "react";
 
 
 function Pagination({currentPage, setCurrentPage, totalPages}) {
@@ -21,12 +22,8 @@ function Pagination({currentPage, setCurrentPage, totalPages}) {
     }
 
     const onClickItem = (page) => {
-        if (typeof page === 'number') {
-            if (page === 1) {
-                setCurrentPage(0)
-            } else {
-                setCurrentPage(page)
-            }
+        if (typeof page === 'number' && page !== currentPage) {
+            setCurrentPage(page)
         }
     }
 
@@ -54,4 +51,4 @@ Pagination.propTypes = {
     totalPages: PropTypes.number
 }
 
-export default Pagination
+export default memo(Pagination)

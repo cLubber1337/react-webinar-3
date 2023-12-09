@@ -11,8 +11,16 @@ class Catalog extends StoreModule {
   initState() {
     return {
       list: [],
-      count: 0
+      totalCount: 0,
+      currentPage: 1
     }
+  }
+
+  setCurrentPage(currentPage) {
+    this.setState({
+      ...this.getState(),
+      currentPage: currentPage
+    })
   }
 
   async load({limit = 10, skip = 0}) {
@@ -21,7 +29,7 @@ class Catalog extends StoreModule {
     this.setState({
       ...this.getState(),
       list: json.result.items,
-      count: json.result.count
+      totalCount: Math.ceil(json.result.count / limit ),
     }, 'Загружены товары из АПИ');
   }
 }

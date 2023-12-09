@@ -1,4 +1,4 @@
-import {memo, useCallback, useEffect, useState} from 'react';
+import {memo, useCallback, useEffect} from 'react';
 import Item from "../../components/item";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
@@ -13,18 +13,13 @@ import {ROUTES} from "../../routes/routes";
 
 const LIMIT = 10;
 function Main() {
-  const [page, setPage] = useState(0);
   const {trans} = useTrans();
-
   const store = useStore();
-
-  useEffect(() => {
-    store.actions.catalog.load({limit: LIMIT, skip: page * LIMIT})
-  }, [page]);
 
   const select = useSelector(state => ({
     list: state.catalog.list,
-    count:  Math.ceil(state.catalog.count / LIMIT - 1),
+    totalCount:  state.catalog.totalCount,
+    currentPage: state.catalog.currentPage,
     amount: state.basket.amount,
     sum: state.basket.sum
   }));
@@ -34,6 +29,8 @@ function Main() {
     addToBasket: useCallback(_id => store.actions.basket.addToBasket(_id), [store]),
     // Открытие модалки корзины
     openModalBasket: useCallback(() => store.actions.modals.open('basket'), [store]),
+    // Установка текущей страницы
+    setCurrentPage: useCallback(currentPage => store.actions.catalog.setCurrentPage(currentPage), [store]),
   }
 
   const renders = {
@@ -42,17 +39,22 @@ function Main() {
     }, [callbacks.addToBasket]),
   };
 
+  const skip = select.currentPage === 1 ? 0 : (select.currentPage - 1) * LIMIT
+
+  useEffect(() => {
+    store.actions.catalog.load({limit: LIMIT, skip})
+  }, [select.currentPage]);
+
   return (
     <PageLayout>
       <Head title={trans('Магазин')}/>
       <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
                   sum={select.sum}/>
       <List list={select.list} renderItem={renders.item}/>
-      <Pagination currentPage={page === 0 ? 1 : page}
-                  setCurrentPage={setPage}
-                  totalPages={select.count} />
+      <Pagination currentPage={select.currentPage}
+                  setCurrentPage={callbacks.setCurrentPage}
+                  totalPages={select.totalCount} />
     </PageLayout>
-
   );
 }
 
