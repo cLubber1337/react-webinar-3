@@ -1,0 +1,5 @@
+.app-tools-menu-layout {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 21px 20px 20px;
+}

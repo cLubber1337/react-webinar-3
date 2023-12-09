@@ -9,6 +9,10 @@ import useSelector from "../../store/use-selector";
 import Pagination from "../../components/pagination";
 import {useTrans} from "../../translation/useTrans";
 import {ROUTES} from "../../routes/routes";
+import {Navbar} from "../../components/navbar";
+import {navigation} from "../../routes/navigation";
+import {AppToolsMenuLayout} from "../../components/app-tools-menu-layout";
+import {LangSwitcher} from "../../components/lang-switcher/lang-switcher";
 
 
 const LIMIT = 10;
@@ -46,10 +50,12 @@ function Main() {
   }, [select.currentPage]);
 
   return (
-    <PageLayout>
-      <Head title={trans('Магазин')}/>
-      <BasketTool onOpen={callbacks.openModalBasket} amount={select.amount}
-                  sum={select.sum}/>
+    <PageLayout head={<Head title={trans('Магазин')}/>}>
+      <AppToolsMenuLayout>
+        <Navbar navigation={navigation} resetCurrentPage={() => callbacks.setCurrentPage(1)}/>
+        <LangSwitcher/>
+        <BasketTool amount={select.amount} sum={select.sum} onOpen={callbacks.openModalBasket}/>
+      </AppToolsMenuLayout>
       <List list={select.list} renderItem={renders.item}/>
       <Pagination currentPage={select.currentPage}
                   setCurrentPage={callbacks.setCurrentPage}
