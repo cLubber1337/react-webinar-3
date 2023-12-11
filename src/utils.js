@@ -55,8 +55,7 @@ export const paginationRange = (totalPages, currentPage, siblingsCount = 1) => {
   const rightSiblingsIndex = Math.min(currentPage + siblingsCount, totalPages)
 
   const showLeftDots = leftSiblingsIndex > 2
-  const showRightDots = rightSiblingsIndex < totalPages - 2
-
+  const showRightDots = rightSiblingsIndex < totalPages - 1
   if (!showLeftDots && showRightDots) {
     const leftItemCount = 3 * siblingsCount
     let leftRange
@@ -68,8 +67,12 @@ export const paginationRange = (totalPages, currentPage, siblingsCount = 1) => {
 
     return [...leftRange, ' ...', totalPages]
   } else if (showLeftDots && !showRightDots) {
-    const rightItemCount = 3 + 2 * siblingsCount
-    const rightRange = _.range(totalPages - rightItemCount + 1, totalPages + 1)
+    const rightItemCount = 3 * siblingsCount
+    let rightRange
+    if (currentPage === totalPages - 2) {
+      rightRange = _.range(totalPages - rightItemCount, totalPages + 1)
+    } else
+      rightRange = _.range(totalPages - rightItemCount + 1, totalPages + 1)
 
     return [1, '... ', ...rightRange]
   } else {
