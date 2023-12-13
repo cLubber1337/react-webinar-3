@@ -31,3 +31,7 @@
 .SideLayout-item {
   margin: 0 5px;
 }
+
+.Select-filterCategory {
+  min-width: 161px;
+}

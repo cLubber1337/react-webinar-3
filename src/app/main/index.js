@@ -15,12 +15,17 @@ import LocaleSelect from "../../containers/locale-select";
 function Main() {
 
   const store = useStore();
+  const {t, lang} = useTranslate();
 
   useInit(() => {
     store.actions.catalog.initParams();
   }, [], true);
 
-  const {t} = useTranslate();
+  useInit(() => {
+    store.actions.catalog.initCategories(lang)
+  }, [lang]);
+
+
 
   return (
     <PageLayout>

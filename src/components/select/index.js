@@ -9,7 +9,7 @@ function Select(props) {
   };
 
   return (
-    <select className="Select" value={props.value} onChange={onSelect}>
+    <select className={`Select ${props.className}`} value={props.value} onChange={onSelect}>
       {props.options.map(item => (
         <option key={item.value} value={item.value}>{item.title}</option>
       ))}
@@ -22,13 +22,15 @@ Select.propTypes = {
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
     title: PropTypes.string
   })).isRequired,
+  className: PropTypes.string,
   value: PropTypes.any,
   onChange: PropTypes.func
 };
 
 Select.defaultProps = {
   onChange: () => {
-  }
+  },
+  className: '',
 }
 
 export default memo(Select);
