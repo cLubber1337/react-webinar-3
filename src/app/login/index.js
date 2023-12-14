@@ -17,7 +17,6 @@ function Login() {
   const select = useSelector(state => ({
     isAuth: state.user.isAuth,
     user: state.user.user,
-    waiting: state.user.waiting
   }));
 
   useEffect(() => {

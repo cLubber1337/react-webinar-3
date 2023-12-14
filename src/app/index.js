@@ -16,12 +16,6 @@ import ProtectedRoute from "../components/protected-route";
 function App() {
   const store = useStore();
   const activeModal = useSelector(state => state.modals.name);
-  const isWaiting = useSelector(state => state.user.waiting);
-
-  console.log(isWaiting)
-  useInit(() => {
-    store.actions.user.authMe();
-  }, []);
 
   useInit(() => {
     store.actions.user.authMe();
