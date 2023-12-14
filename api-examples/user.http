@@ -1,7 +1,7 @@
 ###
 # Авторизация
 
-POST http://example.front.ylab.io/api/v1/users/sign
+POST http://example.front.ylab.io/api/v1/users/sign?fields=_id,email,profile(phone,name)
 Content-Type: application/json
 
 {

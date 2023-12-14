@@ -16,5 +16,13 @@
     "few": "товара",
     "many": "товаров",
     "other": "товара"
-  }
+  },
+  "login.logout": "Выход",
+  "login.password": "Пароль",
+  "login.login": "Вход",
+  "login.username": "Логин",
+  "profileInfo.title": "Профиль",
+  "profileInfo.name": "Имя",
+  "profileInfo.phone": "Телефон",
+  "profileInfo.email": "email"
 }
