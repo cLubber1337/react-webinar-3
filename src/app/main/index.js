@@ -8,6 +8,7 @@ import Head from "../../components/head";
 import CatalogFilter from "../../containers/catalog-filter";
 import CatalogList from "../../containers/catalog-list";
 import LocaleSelect from "../../containers/locale-select";
+import {UserMenu} from "../../containers/user-menu";
 
 /**
  * Главная страница - первичная загрузка каталога
@@ -28,7 +29,7 @@ function Main() {
 
 
   return (
-    <PageLayout>
+    <PageLayout head={<UserMenu />}>
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>

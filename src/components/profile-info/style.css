@@ -1,0 +1,18 @@
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px;
+}
+
+.profile-info-title {
+  margin-bottom: 10px;
+}
+
+.profile-info-item {
+  font-size: 18px;
+}
+
+.profile-info-value {
+  font-weight: bold;
+}

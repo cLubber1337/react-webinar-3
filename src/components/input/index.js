@@ -32,6 +32,10 @@ function Input(props) {
       type={props.type}
       placeholder={props.placeholder}
       onChange={onChange}
+      name={props.name}
+      disabled={props.disabled}
+      required={props.required}
+      id={props.id}
     />
   )
 }
@@ -43,6 +47,9 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   onChange: PropTypes.func,
   theme: PropTypes.string,
+  disabled: PropTypes.bool,
+  required: PropTypes.bool,
+  id: PropTypes.string
 }
 
 Input.defaultProps = {

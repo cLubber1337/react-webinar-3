@@ -1,0 +1,26 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.login-title {
+  margin-bottom: 17px;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  max-width: 203px;
+  gap: 20px 0;
+}
+
+.login-form button {
+  max-width: min-content;
+  cursor: pointer;
+}
+
+.error-message {
+  color: #FF0000;
+}
+
