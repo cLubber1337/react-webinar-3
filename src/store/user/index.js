@@ -4,13 +4,19 @@ class UserState extends StoreModule {
 
   initState() {
     return {
-      isAuth: false,
+      isAuth: !!localStorage.getItem('token'),
       user: {},
       waiting: false,
       error: null
     }
   }
 
+  resetError() {
+    this.setState({
+      ...this.getState(),
+      error: null
+    })
+  }
   async login({login, password}) {
     this.setState({
       waiting: true
@@ -41,6 +47,7 @@ class UserState extends StoreModule {
       });
     } catch (e) {
       this.setState({
+        isAuth: false,
         waiting: false,
         error: e.message
       });
@@ -84,6 +91,7 @@ class UserState extends StoreModule {
 
   async authMe() {
     this.setState({
+      ...this.getState(),
       waiting: true
     });
 
@@ -103,10 +111,11 @@ class UserState extends StoreModule {
 
       this.setState({
         user: result,
-        isAuth: 'true',
+        isAuth: true,
         waiting: false
       })
     } catch (e) {
+      console.log(e.message)
       this.setState({
         waiting: false,
         isAuth: false,

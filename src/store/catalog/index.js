@@ -32,7 +32,6 @@ class CatalogState extends StoreModule {
         ...this.getState(),
         categories: result.items
       });
-
   }
 
   /**

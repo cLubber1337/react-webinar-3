@@ -1,47 +1,18 @@
 import './style.css'
 import Input from "../input";
 import PropTypes from "prop-types";
-import useStore from "../../hooks/use-store";
-import {useCallback, useState} from "react";
-import useSelector from "../../hooks/use-selector";
 
 
-export const LoginForm = ({t}) => {
-  const store = useStore();
-
-  const [formData, setFormData] = useState({
-    login: '',
-    password: ''
-  });
-
-  const select = useSelector(state => ({
-    waiting: state.user.waiting,
-    error: state.user.error,
-  }));
-
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    store.actions.user.login(formData)
-  }
-
-  const callbacks = {
-    onChangePassword: useCallback((password) => {
-      setFormData(prevData => ({
-        ...prevData,
-        password,
-        login: prevData.login
-      }));
-    }, []),
-    onChangeLogin: useCallback((login) => {
-      setFormData(prevData => ({
-        ...prevData,
-        login,
-        password: prevData.password
-      }));
-    }, []),
-  }
-
+export const LoginForm = ({
+                            t,
+                            onChangeLogin,
+                            onChangePassword,
+                            login,
+                            password,
+                            onSubmit,
+                            isLoading,
+                            errorMessage
+                          }) => {
   return (
     <section className={'login'}>
       <h2 className={'login-title'}>{t('login.login')}</h2>
@@ -51,9 +22,9 @@ export const LoginForm = ({t}) => {
           <Input id={'login'}
                  name="login"
                  type={'text'}
-                 onChange={callbacks.onChangeLogin}
-                 value={formData.login}
-                 disabled={select.waiting}
+                 onChange={onChangeLogin}
+                 value={login}
+                 disabled={isLoading}
                  required
           />
         </div>
@@ -62,14 +33,14 @@ export const LoginForm = ({t}) => {
           <Input id={'password'}
                  name="password"
                  type={'password'}
-                 onChange={callbacks.onChangePassword}
-                 value={formData.password}
-                 disabled={select.waiting}
+                 onChange={onChangePassword}
+                 value={password}
+                 disabled={isLoading}
                  required
           />
         </div>
-        {select.error && <span className={'error-message'}>{select.error}</span>}
-        <button disabled={select.waiting} type='submit'>{t('login.login')}</button>
+        {errorMessage && <span className={'error-message'}>{errorMessage}</span>}
+        <button disabled={isLoading} type='submit'>{t('login.login')}</button>
       </form>
     </section>
   )
@@ -77,4 +48,11 @@ export const LoginForm = ({t}) => {
 
 LoginForm.propTypes = {
   t: PropTypes.func,
+  onChangeLogin: PropTypes.func,
+  onChangePassword: PropTypes.func,
+  login: PropTypes.string,
+  password: PropTypes.string,
+  onSubmit: PropTypes.func,
+  isLoading: PropTypes.bool,
+  errorMessage: PropTypes.string
 }

@@ -3,9 +3,9 @@ import Navigation from "../../containers/navigation";
 import PageLayout from "../../components/page-layout";
 import Head from "../../components/head";
 import LocaleSelect from "../../containers/locale-select";
-import {UserMenu} from "../../containers/user-menu";
 import {ProfileInfo} from "../../components/profile-info";
 import useSelector from "../../hooks/use-selector";
+import HeaderTop from "../../containers/header-top";
 
 
 function Profile() {
@@ -17,7 +17,7 @@ function Profile() {
   }));
 
   return (
-    <PageLayout head={<UserMenu />}>
+    <PageLayout head={<HeaderTop />}>
       <Head title={t('title')}>
         <LocaleSelect/>
       </Head>

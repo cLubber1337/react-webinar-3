@@ -7,7 +7,7 @@ import Login from "./login";
 import Profile from "./profile";
 import useInit from "../hooks/use-init";
 import useStore from "../hooks/use-store";
-import ProtectedRoute from "../components/protected-route";
+import ProtectedRoute from "../containers/protected-route";
 
 /**
  * Приложение
@@ -27,7 +27,7 @@ function App() {
         <Route path={''} element={<Main/>}/>
         <Route path={'/articles/:id'} element={<Article/>}/>
         <Route path={'/login'} element={<Login/>}/>
-        <Route path={'/profile/:id'} element={
+        <Route path={'/profile'} element={
           <ProtectedRoute>
             <Profile/>
           </ProtectedRoute>}/>
