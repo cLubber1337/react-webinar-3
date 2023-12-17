@@ -44,6 +44,7 @@ export default function SignIn() {
         password: prevData.password
       }));
     }, []),
+    onSubmit: useCallback((e) => onSubmit(e), [formData])
   }
 
   useEffect(() => {
@@ -53,7 +54,7 @@ export default function SignIn() {
   return (
     <LoginForm
       t={t}
-      onSubmit={onSubmit}
+      onSubmit={callbacks.onSubmit}
       login={formData.login}
       password={formData.password}
       onChangeLogin={callbacks.onChangeLogin}

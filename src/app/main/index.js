@@ -23,7 +23,7 @@ function Main() {
   }, [], true);
 
   useInit(() => {
-    store.actions.catalog.initCategories(lang)
+    store.actions.categories.initCategories(lang);
   }, [lang]);
 
 

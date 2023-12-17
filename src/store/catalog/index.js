@@ -12,7 +12,6 @@ class CatalogState extends StoreModule {
   initState() {
     return {
       list: [],
-      categories: [],
       params: {
         page: 1,
         limit: 10,
@@ -23,15 +22,6 @@ class CatalogState extends StoreModule {
       count: 0,
       waiting: false
     }
-  }
-
-  async initCategories(lang='ru') {
-     const response = await fetch(`/api/v1/categories/?fields=_id,title,parent(_id)&lang=${lang}&limit=*`);
-     const {result} = await response.json();
-      this.setState({
-        ...this.getState(),
-        categories: result.items
-      });
   }
 
   /**
@@ -63,12 +53,6 @@ class CatalogState extends StoreModule {
     await this.setParams(params);
   }
 
-  /**
-   * Установка параметров и загрузка списка товаров
-   * @param [newParams] {Object} Новые параметры
-   * @param [replaceHistory] {Boolean} Заменить адрес (true) или новая запись в истории браузера (false)
-   * @returns {Promise<void>}
-   */
   async setParams(newParams = {}, replaceHistory = false) {
     const params = {...this.getState().params, ...newParams};
 

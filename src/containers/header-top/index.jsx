@@ -11,7 +11,6 @@ export default function HeaderTop() {
   const {t} = useTranslate();
 
   const select = useSelector(state => ({
-    isAuth: state.user.isAuth,
     waiting: state.user.waiting,
     user: state.user.user
   }));
@@ -24,7 +23,6 @@ export default function HeaderTop() {
     <SideLayout padding='small' side='end'>
       <UserMenu t={t}
                 user={select.user}
-                isAuth={select.isAuth}
                 logout={callback.logout}
                 waiting={select.waiting}
                 link={'/profile'}

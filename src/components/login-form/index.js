@@ -1,9 +1,10 @@
 import './style.css'
 import Input from "../input";
 import PropTypes from "prop-types";
+import {memo} from "react";
 
 
-export const LoginForm = ({
+export const LoginForm = memo(({
                             t,
                             onChangeLogin,
                             onChangePassword,
@@ -44,7 +45,7 @@ export const LoginForm = ({
       </form>
     </section>
   )
-}
+})
 
 LoginForm.propTypes = {
   t: PropTypes.func,

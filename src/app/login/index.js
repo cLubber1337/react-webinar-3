@@ -15,14 +15,14 @@ function Login() {
   const {t} = useTranslate();
 
   const select = useSelector(state => ({
-    isAuth: state.user.isAuth,
+    user: state.user.user
   }));
 
   useEffect(() => {
-    if (select.isAuth) {
+    if (select.user) {
       navigate(-1)
     }
-  }, [select.isAuth]);
+  }, [select.user]);
 
   return (
     <PageLayout head={<HeaderTop/>}>

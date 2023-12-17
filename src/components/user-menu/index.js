@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 
 
 
-export const UserMenu = ({isAuth, waiting, user, logout, t, link}) => {
+export const UserMenu = ({waiting, user, logout, t, link}) => {
 
    return  <div className={'user-menu'}>
-      {isAuth ?
+      {!!user ?
         <div className={'user-menu-info'}>
           <Link to={link}>{user?.profile?.name}</Link>
           <button disabled={waiting} onClick={logout}>
@@ -23,9 +23,8 @@ export const UserMenu = ({isAuth, waiting, user, logout, t, link}) => {
 }
 
 UserMenu.propTypes = {
-  isAuth: PropTypes.bool.isRequired,
   waiting: PropTypes.bool.isRequired,
-  user: PropTypes.object.isRequired,
+  user: PropTypes.object,
   logout: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   link: PropTypes.string.isRequired
