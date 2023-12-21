@@ -1,7 +1,8 @@
 // Начальное состояние
 export const initialState = {
   data: {},
-  waiting: false // признак ожидания загрузки
+  waiting: false, // признак ожидания загрузки
+  error: null
 }
 
 // Обработчик действий
@@ -14,7 +15,7 @@ function reducer(state = initialState, action) {
       return {...state, data: action.payload.data, waiting: false};
 
     case "article/load-error":
-      return {...state, data: {}, waiting: false}; //@todo текст ошибки сохранять?
+      return {...state, data: {}, waiting: false, error: action.payload.error}; //@todo текст ошибки сохранять?
 
     default:
       // Нет изменений

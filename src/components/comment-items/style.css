@@ -1,0 +1,9 @@
+.comment-items {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.comment-items-wrapper:first-child {
+  padding-top: 25px;
+}

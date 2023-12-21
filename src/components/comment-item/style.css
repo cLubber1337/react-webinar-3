@@ -1,0 +1,36 @@
+.comment-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.comment-item-user {
+  display: flex;
+  gap: 10px;
+}
+
+.comment-item-user-name {
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.user-me {
+  color: #666666;
+}
+
+.comment-item-user-date {
+  color: #666;
+  font-size: 12px;
+}
+
+.comment-item-text {
+  font-size: 14px;
+}
+
+.comment-item-action {
+  all: unset;
+  cursor: pointer;
+  color: #0087E9;
+  font-size: 12px;
+  width: max-content;
+}

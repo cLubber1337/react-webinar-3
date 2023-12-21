@@ -6,11 +6,11 @@ GET http://example.front.ylab.io/api/v1/comments?fields=items(_id,text,dateCreat
 
 ###
 # Создание коммента
-POST http://example.front.ylab.io/api/v1/comments
+POST http://example.front.ylab.io/api/v1/comments?fields=_id,text,dateCreate,author(profile(name)),parent(_id,_type)
 Content-Type: application/json
 X-Token: ed9b341d85860b91420b216594a433c1e3d564cd7246e714ee02b3ec395a6ce5
 
 {
-  "text": "Первый коммент!",
+  "text": "ALABAMA!",
   "parent": {"_id":  "65817bed5c295a2ff2fcd189", "_type":  "article"}
 }
