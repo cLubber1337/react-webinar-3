@@ -1,31 +1,43 @@
 import './style.css'
 import {Textarea} from "../textarea";
 import PropTypes from "prop-types";
-import {Link} from "react-router-dom";
-import {memo, useState} from "react";
+import {forwardRef, memo, useState} from "react";
 
 
-export const CommentForm = memo(({isAuth, values, link, onHide, onSubmit, disabled }) => {
+export const CommentForm = memo(forwardRef(({
+                                   isAuth,
+                                   values,
+                                   onHide,
+                                   onSubmit,
+                                   disabled,
+                                   onSignIn,
+                                   style = {},
+                                 }, ref) => {
   const [value, setValue] = useState('');
   const isAnswer = values.name === 'new-answer';
 
   const onSubmitHandler = (e) => {
     e.preventDefault();
-    onSubmit(value);
+    let text = value.trim();
+    if (text === '') {
+      return;
+    }
+    onSubmit(text);
     setValue('');
   }
 
   return (
     <>
       {!isAuth ?
-        <p className='not-authorized'>
-          <Link className='not-authorized-link' to={link}>
+        <p className='not-authorized' style={style} ref={ref}>
+          <button className='not-authorized-link' onClick={onSignIn}>
             Войдите
-          </Link>, {values.text}
+          </button>
+          , {values.text}
           {isAnswer && <span onClick={onHide} className='not-authorized-link cancel-link'>Отмена</span>}
         </p>
         :
-        <form className='comment-form' onSubmit={onSubmitHandler}>
+        <form className='comment-form' onSubmit={onSubmitHandler} style={style} ref={ref}>
           {values.label &&
             <label className='comment-form-label' htmlFor={values.id}>
               {values.label}
@@ -39,13 +51,13 @@ export const CommentForm = memo(({isAuth, values, link, onHide, onSubmit, disabl
           />
           <div className='comment-form-actions'>
             <button disabled={disabled} type='submit'>Отправить</button>
-            { isAnswer && <button disabled={disabled} onClick={onHide}>Отмена</button>}
+            {isAnswer && <button disabled={disabled} onClick={onHide}>Отмена</button>}
           </div>
         </form>
       }
     </>
   )
-})
+}))
 
 CommentForm.propTypes = {
   isAuth: PropTypes.bool,
@@ -56,8 +68,8 @@ CommentForm.propTypes = {
     required: PropTypes.bool,
     text: PropTypes.string
   }),
-  link: PropTypes.string,
   onHide: PropTypes.func,
   onSubmit: PropTypes.func,
-  disabled: PropTypes.bool
+  disabled: PropTypes.bool,
+  onSignIn: PropTypes.func
 }

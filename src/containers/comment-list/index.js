@@ -9,13 +9,14 @@ import commentsActions from '../../store-redux/comments/actions';
 import useInit from "../../hooks/use-init";
 import shallowequal from "shallowequal";
 import useSelector from "../../hooks/use-selector";
-import {useParams} from "react-router-dom";
+import {useNavigate, useParams} from "react-router-dom";
 
 
 export const CommentList = () => {
   const [showForm, setShowForm] = useState(true)
   const params = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const select = useSelector(state => ({
     exists: state.session.exists,
@@ -37,6 +38,9 @@ export const CommentList = () => {
         _type: "comment"
       }))
       , []),
+    onSignIn: useCallback(() => {
+      navigate('/login', {state: {back: location.pathname}});
+    }, [location.pathname]),
   }
 
 
@@ -61,14 +65,15 @@ export const CommentList = () => {
                         setShowForm={setShowForm}
                         createNewAnswer={callBacks.createNewAnswer}
                         disabled={reduxSelect.isFetching}
+                        onSignIn={callBacks.onSignIn}
           />
         }
         footer={showForm &&
           <CommentForm isAuth={select.exists}
                        onSubmit={callBacks.createNewComment}
                        values={commentFormValues.newComment}
-                       link="/login"
                        disabled={reduxSelect.isFetching}
+                       onSignIn={callBacks.onSignIn}
           />}
       >
       </CommentLayout>

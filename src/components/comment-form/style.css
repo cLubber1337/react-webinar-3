@@ -28,6 +28,7 @@
 }
 
 .not-authorized-link {
+  all: unset;
   cursor: pointer;
   text-decoration: underline;
   color: #0087E9;

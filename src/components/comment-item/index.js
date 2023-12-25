@@ -4,8 +4,8 @@ import {memo} from "react";
 import {formatDate} from "../../utils/format-date";
 
 
-export const CommentItem = memo(({item, onShow,userId}) => {
-  return <div className='comment-item'>
+export const CommentItem = memo(({item, onShow,userId, style}) => {
+  return <div className='comment-item' style={style}>
     <div className='comment-item-user'>
       <span className={userId === item.author?._id ? 'comment-item-user-name user-me' : 'comment-item-user-name'}>
         {item.author?.profile?.name}
